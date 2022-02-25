@@ -1,6 +1,6 @@
 #... here all the imports
 import itertools
-import concurrent
+from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 
 # lists of all weights that want to check
@@ -20,7 +20,7 @@ def sim_run(w1, w2, w3):
     return (w1, w2, w3), w1 + w2 + w3
 
 
-with concurrent.futures.ProcessPoolExecutor(max_workers=10) as executor:
+with ProcessPoolExecutor(max_workers=10) as executor:
     results = executor.map(sim_run, input_param)
     search_results = tuple(results)
 
