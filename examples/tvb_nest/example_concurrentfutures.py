@@ -2,6 +2,7 @@
 import itertools
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np
+import time
 
 # lists of all weights that want to check
 w1 = np.arange(0,1,0.25)
@@ -23,13 +24,20 @@ def sim_run(w1, w2, w3):
     print('%.1f + %.1f + %.1f = %.1f' % (w1, w2, w3, out))
     return out
 
-
 print('\nRESULTS:')
-# run locally, not parallel
-# results = map(sim_run, *input_param)
-# print(list(results))
+# run not parallel
+print('\nSequential:')
+tic = time.time()
+results = map(sim_run, *input_param)
+print(list(results))
+toc = time.time()
+print(toc - tic)
 
 # run parallel
+print('\nParallel:')
+tic = time.time()
 with ProcessPoolExecutor(max_workers=10) as executor:
     results = executor.map(sim_run, *input_param)
     print(list(results))
+toc = time.time()
+print(toc - tic)
