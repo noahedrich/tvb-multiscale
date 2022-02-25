@@ -22,5 +22,5 @@ def sim_run(w1, w2, w3):
 
 with ProcessPoolExecutor(max_workers=10) as executor:
     for params in input_param:
-        results = executor.map(sim_run, *params)
+        results = executor.map(sim_run, params)
         print('%.1f + %.1f + %.1f = %.1f' % (*params, results))
