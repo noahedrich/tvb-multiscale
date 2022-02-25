@@ -21,7 +21,7 @@ def sim_run(w1, w2, w3):
 
 
 with ProcessPoolExecutor(max_workers=10) as executor:
-    results = executor.map(sim_run, input_param)
+    results = executor.map(sim_run, *input_param)
     search_results = tuple(results)
 
 print(search_results)
