@@ -12,6 +12,7 @@ w3 = np.arange(0,1,0.25)
 a = [w1, w2, w3]
 input_param = list(itertools.product(*a))
 input_param = [np.array(params) for params in input_param]
+print('PARAMETERS:')
 print(input_param)
 
 
@@ -19,8 +20,11 @@ print(input_param)
 def sim_run(w1, w2, w3):
     return w1 + w2 + w3
 
-
+print('\nRESULTS:')
 with ProcessPoolExecutor(max_workers=10) as executor:
     for params in input_param:
         results = executor.map(sim_run, params)
-        print('%.1f + %.1f + %.1f = %.1f' % (*params, results))
+        print(list(results))
+        print(float(results))
+        print(results)
+        print('%.1f + %.1f + %.1f = %.1f' % (*params, float(results)))
