@@ -24,6 +24,8 @@ def wilson_cowan_example(**kwargs):
 if __name__ == "__main__":
     import sys
     if sys.argv[-1] == "1":
+        print("multisynapse=True")
         wilson_cowan_example(model="RATE", multisynapse=True)
     else:
+        print("multisynapse=False")
         wilson_cowan_example(model="RATE", multisynapse=False)
