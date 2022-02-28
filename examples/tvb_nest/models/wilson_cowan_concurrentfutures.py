@@ -54,10 +54,11 @@ if __name__ == "__main__":
     for params in input_param:
         # parameters that remain fixed
         d = {"model": "RATE",
-             "multisynapse": True}
+             "multisynapse": True,
+             "model_params": {}}
         # parameters that change value
         for key, val in zip(input_param_names, params):
-            d[key] = val
+            d["model_params"][key] = val
         input_param_dicts.append(d)
 
     # distribute simulation to different workers
