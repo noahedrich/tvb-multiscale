@@ -45,8 +45,6 @@ if __name__ == "__main__":
     a = [c_ee, c_ei, c_ie, c_ii]
     input_param = list(itertools.product(*a))
     input_param = np.array([np.array(params) for params in input_param])
-    input_param = input_param.T
-    print(input_param)
 
     # convert arrays of parameter values to dicts, so can use as kwargs
     input_param_names = ["c_ee", "c_ei", "c_ie", "c_ii"]
