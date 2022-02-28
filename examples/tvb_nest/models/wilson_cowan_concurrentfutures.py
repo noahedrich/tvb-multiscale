@@ -8,6 +8,10 @@ from tvb_multiscale.tvb_nest.nest_models.models.wilson_cowan import \
 from examples.tvb_nest.example import main_example
 from examples.models.wilson_cowan import wilson_cowan_example as wilson_cowan_example_base
 
+# wrapper function to pass kwargs through map()
+def wilson_cowan_wrapper(kwargs):
+    return wilson_cowan_example(**kwargs)
+
 
 def wilson_cowan_example(**kwargs):
     print("\n\n\n KEY WORD ARGUMENTS:")
@@ -48,12 +52,14 @@ if __name__ == "__main__":
     input_param_names = ["c_ee", "c_ei", "c_ie", "c_ii"]
     input_param_dicts = []
     for params in input_param:
-        d = {}
+        # parameters that remain fixed
+        d = {"model": "RATE",
+             "multisynapse": True}
+        # parameters that change value
         for key, val in zip(input_param_names, params):
             d[key] = val
         input_param_dicts.append(d)
 
     # distribute simulation to different workers
     with ProcessPoolExecutor(max_workers=10) as executor:
-        executor.map(wilson_cowan_example, model="RATE", multisynapse=True)
-        # results = executor.map(sim_run, *input_param)
+        executor.map(wilson_cowan_wrapper, input_param_dicts)
