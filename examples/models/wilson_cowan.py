@@ -36,6 +36,10 @@ def wilson_cowan_example(spikeNet_model_builder, tvb_spikeNet_model_builder, orc
     }
 
     model_params.update(kwargs.pop("model_params", {}))
+    
+    print("\n\n\n\n\n\n\n\n\n\n")
+    print(model_params)
+    print("\n\n\n\n\n\n\n\n\n\n")
 
     spikeNet_model_builder.populations_order = kwargs.pop("populations_order", 100)
 
